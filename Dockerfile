@@ -32,11 +32,11 @@ RUN echo "**** configure nginx ****" && \
 # install heimdall
 RUN echo "**** install heimdall ****" && \
     mkdir -p /heimdall && \
-    if [ -z ${HEIMDALL_RELEASE+x} ]; then \
-        HEIMDALL_RELEASE=$(curl -sX GET "https://api.github.com/repos/linuxserver/Heimdall/releases/latest" \
-        | awk '/tag_name/{print $4;exit}' FS='[""]'); \
+    if [ -z $${HEIMDALL_RELEASE+x} ]; then \
+        HEIMDALL_RELEASE=$$(curl -sX GET "https://api.github.com/repos/linuxserver/Heimdall/releases/latest" \
+        | awk '/tag_name/{print $$4;exit}' FS='[\"\"]'); \
     fi && \
-    curl -o /tmp/heimdall.tar.gz -L "https://github.com/linuxserver/Heimdall/archive/${HEIMDALL_RELEASE}.tar.gz" && \
+    curl -o /tmp/heimdall.tar.gz -L "https://github.com/linuxserver/Heimdall/archive/$${HEIMDALL_RELEASE}.tar.gz" && \
     mkdir -p /app/www-tmp && \
     tar xf /tmp/heimdall.tar.gz -C /app/www-tmp --strip-components=1
 
