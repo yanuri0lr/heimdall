@@ -12,6 +12,9 @@ LABEL maintainer="aptalca"
 # environment settings
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
 
+# Set the build date to the current timestamp
+RUN echo "Build date: $BUILD_DATE"
+
 # install runtime packages
 RUN echo "**** install runtime packages ****" && \
     apk add --no-cache \
